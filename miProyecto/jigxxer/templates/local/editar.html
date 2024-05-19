@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block titulo %} Editar producto {% endblock %}
+
+{% block contenido %}
+<style>
+    
+    body {
+        background-color: #E0E0E0; 
+        color: #ffffff; 
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px #777; 
+        margin: 20px auto;
+        max-width: 800px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff; 
+        color: #000; 
+    }
+
+    .card-header {
+        background-color: #040D47; 
+        color: #fff; 
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        text-align: center; 
+    }
+
+    .card-body {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto; 
+    }
+
+    .card-title {
+        margin-bottom: 20px;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #ffffff; 
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .card-footer {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        padding: 10px;
+        text-align: center; 
+    }
+
+    /* Estilos para cuadros de texto */
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+    }
+
+    input#id_negocio {
+        -webkit-appearance: menulist;
+        -moz-appearance: menulist;
+        appearance: menulist;
+    }
+
+    input[type="submit"],
+    a.btn {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 13px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background-color: #28a745;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    a.btn.btn-danger {
+        background-color: #dc3545;
+    }
+
+    input[type="submit"]:hover,
+    a.btn:hover {
+        background-color: #218838;
+    }
+
+    a.btn.btn-danger:hover {
+        background-color: #c82333;
+    }
+
+    /* Estilos para hacer responsive */
+    @media (max-width: 768px) {
+        .card {
+            width: 100%; /* Cambiar el ancho al 100% en dispositivos más pequeños */
+            margin: 10px auto; /* Ajustar margen para dispositivos más pequeños */
+        }
+    }
+    
+</style>
+
+<div class="card">
+    <h4 class="card-header">EDITAR PRODUCTO</h4>
+    <div class="card-body">
+        <h5> Nuevo nombre del producto</h5>
+        <br>
+        {% include 'local/form.html' %}
+    </div>
+</div>
+
+{% endblock %}

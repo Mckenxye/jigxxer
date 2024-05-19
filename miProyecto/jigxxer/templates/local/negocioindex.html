@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block titulo %} TU NEGOCIO {% endblock %}
+
+{% block contenido %}
+<style>
+
+    body {
+        background-color: #E0E0E0; 
+        color: #000; 
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    .card {
+        border-radius: 10px;
+        box-shadow: 0 4px 6px #777;
+        margin: 20px auto;
+        max-width: 800px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff; 
+        color: #000; 
+    }
+
+    .card-header {
+        background-color: #040D47;
+        color: #fff; 
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        padding: 10px;
+        text-align: center; 
+    }
+
+    .card-body {
+        flex-grow: 1;
+        padding: 20px;
+        overflow-y: auto; 
+    }
+
+    .table {
+        width: 100%; 
+        border-collapse: collapse;
+        color: #000; 
+    }
+
+    .table th,
+    .table td {
+        padding: 12px;
+        border: 1px solid #000; 
+        background-color: #fff; 
+        color: #000; 
+    }
+
+    .table th {
+        background-color: #777;
+    }
+
+    .table tbody tr:nth-child(even) {
+        background-color: #fff; 
+    }
+
+    .table tbody tr:hover {
+        background-color: #fff; 
+    }
+</style>
+
+<div class="card">
+    <h4 class="card-header">
+        MI NEGOCIO
+    </h4>
+    <div class="card-body">
+        <h7 class="card-title">Historial de Ventas</h7>
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Cliente</th>
+                        <th>Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2024-05-01</td>
+                        <td>Producto A</td>
+                        <td>2</td>
+                        <td>$50.000</td>
+                        <td>Juan Perez</td>
+                        <td>juan@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

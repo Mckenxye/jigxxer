@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro de negocio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            max-width: 90%;
+            width: 400px;
+            margin: 0 auto;
+            transition: background-color 0.3s, border 0.3s;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid;
+            transition: border-top-color 0.3s;
+        }
+
+        button[type="submit"] {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: underline;
+            margin: 10px auto;
+            transition: color 0.3s;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #777;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, color 0.3s, border 0.3s;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .password-container .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        .password-container .toggle-password i {
+            color: #777;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 5px;
+        }
+
+        .user-type-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .user-type-container div {
+            flex: 1;
+            margin-right: 10px;
+        }
+
+        .user-type-container div:last-child {
+            margin-right: 0;
+        }
+
+        .user-type-container label {
+            cursor: pointer;
+            display: block;
+            padding: 10px 0;
+            border: 2px solid;
+            border-radius: 5px;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .user-type-container #negocio + label {
+            border-color: #FF5733;
+        }
+
+        .user-type-container #cliente + label {
+            border-color: #33C1FF;
+        }
+
+        .user-type-container input[type="radio"] {
+            display: none;
+        }
+
+        body.light-mode {
+            background-color: #E0E0E0;
+            color: #000;
+        }
+
+        .light-mode .card {
+            border: 1px solid #fff;
+            background-color: #fff;
+        }
+
+        .light-mode hr {
+            border-top-color: #777;
+        }
+
+        .light-mode button[type="submit"] {
+            background-color: #0083FF;
+            color: #000;
+        }
+
+        .light-mode a {
+            color: #0083FF;
+        }
+
+        .light-mode input[type="text"],
+        .light-mode input[type="password"],
+        .light-mode input[type="email"] {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .light-mode .user-type-container input[type="radio"]:checked + label {
+            background-color: #81FF91;
+            color: #000;
+        }
+
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h2>Crea tu negocio</h2>
+                <hr>
+                <form id="registration-form" action="" method="post"> 
+                    {% csrf_token %}
+                    <label for="nombre_negocio">Nombre del Negocio:</label>
+                    <input type="text" id="nombre_negocio" name="nombre_negocio" required>
+                    <label for="telefono">Teléfono:</label>
+                    <input type="text" id="telefono" name="telefono" required>
+                    <label for="numero_de_local">Número de Local:</label>
+                    <input type="text" id="numero_de_local" name="numero_de_local" required>
+                    <input type="hidden" name="usuario_administrador" value="{{ request.user.id }}">
+                    <button type="submit"><strong>Crear Negocio</strong></button>
+                    <a href="{% url 'login' %}"><strong>Volver</strong></a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Script para alternar la visibilidad de la contraseña
+        const togglePassword = document.querySelectorAll('.toggle-password');
+
+        togglePassword.forEach(function(element) {
+            element.addEventListener('click', function() {
+                const passwordInput = this.parentElement.querySelector('input');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    this.querySelector('i').classList.remove('fa-eye');
+                    this.querySelector('i').classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    this.querySelector('i').classList.remove('fa-eye-slash');
+                    this.querySelector('i').classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Script para verificar que las contraseñas coincidan
+        const registrationForm = document.getElementById('registration-form');
+        const passwordInput1 = document.getElementById('password1');
+        const passwordInput2 = document.getElementById('confirm_password1');
+        const passwordError = document.getElementById('password2-error');
+
+        registrationForm.addEventListener('submit', function(event) {
+            if (passwordInput1.value !== passwordInput2.value) {
+                event.preventDefault();
+                passwordError.textContent = 'Las contraseñas no coinciden.';
+            } else {
+                passwordError.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

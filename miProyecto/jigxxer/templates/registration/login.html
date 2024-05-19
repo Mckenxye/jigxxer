@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicia Sesion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            max-width: 90%;
+            width: 400px;
+            margin: 0 auto;
+            transition: background-color 0.3s, border 0.3s;
+        }
+
+        .card-body {
+            padding: 2em;
+        }
+
+        h2, h4 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid;
+            transition: border-top-color 0.3s;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            text-decoration: underline;
+            margin: 10px auto;
+            transition: color 0.3s;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s, border 0.3s;
+        }
+
+        button[type="submit"] {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 10px auto;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        button[type="submit"] strong {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .card {
+                max-width: 100%;
+            }
+        }
+
+        /* Estilos claros */
+        body.light-mode {
+            background-color: #E0E0E0;
+            color: #000;
+        }
+
+        body.light-mode .card {
+            border: 1px solid #fff;
+            background-color: #fff;
+        }
+
+        body.light-mode hr {
+            border-top-color: #777;
+        }
+
+        body.light-mode a {
+            color: #0083FF;
+        }
+
+        body.light-mode input[type="text"],
+        body.light-mode input[type="password"] {
+            border: 1px solid #777;
+            background-color: #fff;
+            color: #000;
+        }
+
+        body.light-mode button[type="submit"] {
+            background-color: #0083FF;
+            color: #000;
+        }
+
+        body.light-mode button[type="submit"]:hover {
+            background-color: #0072E5;
+        }
+
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <center><img src="https://i.imgur.com/okIEWNN.png" width="160" height="145" /></center>
+                <form action="" method="post"> 
+                    {% csrf_token %}
+                    <center><h4> Ingresa tus datos </h4></center>
+                    <label for="username">Usuario:</label>
+                    <input type="text" id="username" name="username" required>
+                    <br><br>
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                    <br><br>                   
+                    <button type="submit" class="btn btn-primary"><strong>Ingresar</strong></button>
+                    <a href="{% url 'registro' %}">Crea una cuenta</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

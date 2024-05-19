@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block titulo %}Productos{% endblock %}
+
+{% block contenido %}
+<!-- Estilos para modo oscuro -->
+<style>
+    body {
+        background-color: #E0E0E0;
+        color: #fff;
+    }
+
+    .card {
+        background-color: #040D47;
+        color: #fff;
+    }
+
+    .table {
+        background-color: #000;
+        color: #000;
+    }
+
+    .form-control {
+        color: #000;
+        background-color: #000;
+        border-color: #000; /* Cambia el color del borde del input */
+    }
+
+    .form-control::placeholder {
+        color: #000; /* Cambia el color del placeholder */
+    }
+
+    /* Estilos adicionales para la tabla en modo oscuro */
+    .table th,
+    .table td {
+        border-color: #fff; /* Cambia el color de los bordes */
+    }
+
+    .add-product-btn {
+        margin-top: -10px; /* Ajusta este valor según tus necesidades */
+    }
+
+    @media (max-width: 1080px) {
+        .nav {
+            padding: 15px;
+        }
+        .container {
+            width: 90%;
+            margin: 0 auto;
+        }
+        section {
+            padding: 3rem;
+        }
+        .shop {
+            margin-top: 2rem;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .nav {
+            padding: 11px;
+        }
+        .logo {
+            font-size: 1rem;
+        }
+        .cart {
+            width: 320px;
+        }
+    }
+
+    @media (max-width: 360px) {
+        .shop {
+            margin-top: 1rem;
+        }
+        .cart {
+            width: 280px;
+        }
+    }
+</style>
+
+<div class="card">
+    <center><h4 class="card-title">LISTA  DE PRODUCTOS</h4></center>
+    <!-- Formulario de búsqueda -->
+    <form method="get" action="{% url 'buscar_producto' %}">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" name="q" placeholder="Buscar producto..." style="background-color: #fff; color: #000;">
+            <div class="input-group-append">
+                <button class="btn btn-success" type="submit">Buscar</button>
+            </div>
+        </div>
+    </form>
+    <!-- Botón para agregar productos -->
+    <div class="row">
+        <div class="col">
+            <a href="{% url 'crear' %}" class="btn btn-success add-product-btn" role="button">Agregar Productos</a>
+        </div>
+    </div>
+</div>
+
+<!-- Resultados de la búsqueda o todos los productos -->
+<div class="table-responsive">
+    <table class="table table">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venta in resultados %}
+            <tr>
+                <td><img src="{{ venta.imagen.url }}" height="100" /></td>
+                <td>{{ venta.producto }}</td>
+                <td>{{ venta.precio }}</td>
+                <td>{{ venta.cantidad }}</td>
+                <td>
+                    <!-- Botones para editar y eliminar productos -->
+                    <a href="{% url 'editar' venta.Id_venta %}" class="btn btn-info" role="button">Modificar</a>
+                    <a href="{% url 'eliminar' venta.Id_venta %}" class="btn btn-danger" role="button">Borrar</a>
+                </td>
+            </tr>
+            {% empty %}
+                <!-- Manejo de resultados vacíos -->
+                <tr>
+                    <td colspan="5">No se encontraron productos.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
